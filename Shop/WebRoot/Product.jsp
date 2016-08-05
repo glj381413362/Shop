@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*,cn.com.bean.*" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -28,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <div id="childNav">
 	<div class="welcome wrap">
-		管理员<%=request.getSession().getAttribute("user")%>您好，今天是2012-12-21，欢迎回到管理后台。
+		${user}管理员<%=request.getSession().getAttribute("user")%>您好，今天是2012-12-21，欢迎回到管理后台。
 	</div>
 </div>
 <div id="position" class="wrap">
@@ -82,12 +83,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          +"</td><td align='center'>"+b.getBinfo()
          +"</td><td align='center'>"+b.getBnumber()
          +"</td><td align='center'><a href='ProductUpdate.jsp?id="
-         +b.getBid()+"'>修改</a>&nbsp;<a href='buyCardServlet.action?op=delete&id="
+         +b.getBid()+"'>修改修改</a>&nbsp;<a href='buyCardServlet.action?op=delete&id="
          +b.getBid()+"'>删除</a><a href='cartServlet.action?op=add&id="
          +b.getBid()+"'>购买</a></td></tr>");
       }
    }
    %>
+   
+   <c:forEach var="buycard" items="${product}">
+     <tr><td align='center'>${buycard.bname}</td></tr>
+   </c:forEach>
  
   
   <tr>

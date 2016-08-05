@@ -31,6 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <th >商品价格</th>
     <th >商品详情</th>
     <th >商品数量</th>
+    <th >操作</th>
   </tr>
   <% 
   Object obj = request.getAttribute("carts");
@@ -45,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          +"</td><td align='center'>"+carts.get(key).getBprice()
          +"</td><td align='center'>"+carts.get(key).getBinfo()
          +"</td><td align='center'>"+carts.get(key).getCartnum()
-         +"</td><td align='center'>");
+         +"</td><td align='center'><a href='cartServlet.action?op=select?id="+carts.get(key).getBid()+"'>删除</a></td></tr>");
   }
    %>
   </body>

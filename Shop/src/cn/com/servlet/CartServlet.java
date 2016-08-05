@@ -73,9 +73,10 @@ public class CartServlet extends HttpServlet{
 		{
 			
 		}
-		if(op.equals("selete"))
+		if(op.equals("select"))
 		{
-			
+			String id = req.getParameter("id");
+//			if(cart)
 		}
 		
 		

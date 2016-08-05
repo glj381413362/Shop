@@ -15,7 +15,7 @@ public class BuyCard implements Serializable {
 	private String binfo;// 商品描述信息
 	private String bface;// 商品图片路径
 	private int bnumber;// 商品数量 1
-	private int cartnum=0;
+	private int cartnum=1;
 
 	public int getCartnum() {
 		return cartnum;
