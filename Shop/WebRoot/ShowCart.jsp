@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*,cn.com.bean.*" pageEncoding="utf-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt"  prefix="c"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -33,21 +34,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <th >商品数量</th>
     <th >操作</th>
   </tr>
-  <% 
-  Object obj = request.getAttribute("carts");
-  if(obj!=null)
-  {
-     Map<Integer, BuyCard> carts = (Map<Integer, BuyCard>)obj;
-      //向页面输出
-      for(Integer key : carts.keySet())
-         out.println("<tr><td align='center'>"+carts.get(key).getBid()
-         +"</td><td align='center'><img src='"+carts.get(key).getBface()
-         +"'></td><td align='center'>"+carts.get(key).getBname()
-         +"</td><td align='center'>"+carts.get(key).getBprice()
-         +"</td><td align='center'>"+carts.get(key).getBinfo()
-         +"</td><td align='center'>"+carts.get(key).getCartnum()
-         +"</td><td align='center'><a href='cartServlet.action?op=select?id="+carts.get(key).getBid()+"'>删除</a></td></tr>");
-  }
-   %>
+   <c:forEach var="cart" items="${cart}">
+      <tr><td align='center'>${cart.key}</td>
+      <td align='center'><img src="${cart.value.bface}"/></td>
+      <td align='center'>${cart.value.bname}</td>
+      <td align='center'>${cart.value.bprice}</td>
+      <td align='center'>${cart.value.binfo}</td>
+      <td align='center'>${cart.value.cartnum}</td>
+       <td align='center'><a href="cartServlet.action?op=delete&id=${cart.key}">删除</a></td></tr>
+   </c:forEach>
   </body>
 </html>

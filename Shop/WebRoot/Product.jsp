@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <div id="childNav">
 	<div class="welcome wrap">
-		${user}管理员<%=request.getSession().getAttribute("user")%>您好，今天是2012-12-21，欢迎回到管理后台。
+		管理员您好，今天是2012-12-21，欢迎回到管理后台。
 	</div>
 </div>
 <div id="position" class="wrap">
@@ -37,9 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <div id="main" class="wrap">
 	<div id="menu-mng" class="lefter">
-		<div class="box">
-			<dl>
-				<dt>用户管理</dt>
+管理</dt>
 				<dd><em><a href="user-add.html">新增</a></em><a href="user.html">用户管理</a></dd>
 				<dt>商品信息</dt>
 				<dd><em><a href="productClass-add.html">新增</a></em><a href="productClass.html">分类管理</a></dd>
@@ -66,44 +64,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <th >商品数量</th>
     <th>操作</th>
   </tr>
-  
-  <%
-  Object obj = request.getAttribute("product");
-  if(obj != null)
-  {
-       //转型
-    List<BuyCard> buyCards=(List<BuyCard>)obj;
-      for(BuyCard b:buyCards)
-      {
-         //向页面输出
-         out.println("<tr><td align='center'>"+b.getBid()
-         +"</td><td align='center'><img src='"+b.getBface()
-         +"'></td><td align='center'>"+b.getBname()
-         +"</td><td align='center'>"+b.getBprice()
-         +"</td><td align='center'>"+b.getBinfo()
-         +"</td><td align='center'>"+b.getBnumber()
-         +"</td><td align='center'><a href='ProductUpdate.jsp?id="
-         +b.getBid()+"'>修改修改</a>&nbsp;<a href='buyCardServlet.action?op=delete&id="
-         +b.getBid()+"'>删除</a><a href='cartServlet.action?op=add&id="
-         +b.getBid()+"'>购买</a></td></tr>");
-      }
-   }
-   %>
-   
    <c:forEach var="buycard" items="${product}">
-     <tr><td align='center'>${buycard.bname}</td></tr>
+     <tr><td align='center'>${buycard.bid}</td>
+     <td align='center'><img src="${buycard.bface}" alt="" /></td>
+     <td align='center'>${buycard.bname}</td>
+     <td align='center'>${buycard.bprice}</td>
+     <td align='center'>${buycard.binfo}</td>
+     <td align='center'>${buycard.bnumber}</td>
+     <td align='center'><a href='buyCardServlet.action?op=update&opp=select&id=${buycard.bid}'>修改</a>&nbsp;<a href='buyCardServlet.action?op=delete&id=${buycard.bid}'>删除</a><a href='cartServlet.action?op=add&id=${buycard.bid}'>购买</a></td>
+     </tr>
    </c:forEach>
- 
-  
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td >&nbsp;</td>
-  </tr>
 </table>
 		</div>
 	</div>

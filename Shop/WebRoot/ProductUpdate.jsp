@@ -61,12 +61,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="main">
 		<h2>修改商品</h2>
 		<div class="manage">
-			<form action="buyCardServlet.action?op=update" method="post">
-			  <input type="hidden" name="id" value="<%=2 %>"/> 
+			<form action="buyCardServlet.action?op=update&opp=update&id=${buyCard.bid}" method="post">
 				<table class="form">
 					<tr>
 						<td class="field">商品名称：</td>
-						<td><input type="text" class="text" name="productName" value="<%=buyCard.getBname() %>" /></td>
+						<td><input type="text" class="text" name="productName" value="${buyCard.bname}" /></td>
 					</tr>
 					<tr>
 						<td class="field">商品图片：</td>
@@ -74,15 +73,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tr>
 					<tr>
 						<td class="field">商品价格：</td>
-						<td><input type="text" class="text tiny" name="productPrice"  value="<%=buyCard.getBprice()%>" /> 元</td>
+						<td><input type="text" class="text tiny" name="productPrice"  value="${buyCard.bprice}" /> 元</td>
 					</tr>
 					<tr>
 						<td class="field">商品详细：</td>
-						<td><textarea rows="4" cols="20" name="binfo" id="binfo" value="<%=buyCard.getBinfo() %>" ><%=buyCard.getBinfo() %></textarea>
+						<td><textarea rows="4" cols="20" name="binfo" id="binfo" value="${buyCard.binfo}" >${buyCard.binfo}</textarea>
 					</tr>
 					<tr>
 						<td class="field">库存：</td>
-						<td><input type="text" class="text tiny" name="productNumber"  value="<%=buyCard.getBnumber() %>" /></td>
+						<td><input type="text" class="text tiny" name="productNumber"  value="${buyCard.bnumber}" /></td>
 					</tr>
 					<tr>
 						<td></td>

@@ -54,31 +54,40 @@ public class BuyCardServlet extends HttpServlet{
                 }
 				    	}
 			if(op.equals("update")){
-				System.out.println("dd");
+				String opp = req.getParameter("opp");
 				int i = Integer.parseInt(req.getParameter("id"));
 				BuyCard buyCard = buyCardService.getBuyCard(i);
-				
-                String productName = req.getParameter("productName");
-                String photo = req.getParameter("photo");
-                String info = req.getParameter("binfo");
-                int number = Integer.parseInt(req.getParameter("productNumber"));
-                double bprice = Double.parseDouble(req.getParameter("productPrice"));
-                
-                buyCard.setBid(i);
-                buyCard.setBface("images/"+photo);
-                buyCard.setBinfo(info);
-                buyCard.setBname(productName);
-                buyCard.setBnumber(number);
-                buyCard.setBprice(bprice);
-                
-                boolean result = buyCardService.updateBuyCard(buyCard);
-                
-                if(result)
-                {
-                	List<BuyCard> product = prduct_server.getAllBuyCard();
-    				req.setAttribute("product", product);
-    				req.getRequestDispatcher("Product.jsp").forward(req, resp);
-                }
+				if(opp.equals("select"))
+				{
+					req.setAttribute("buyCard", buyCard);
+					req.getRequestDispatcher("ProductUpdate.jsp").forward(req, resp);
+				}
+				if(opp.equals("update"))
+				{
+					
+					
+	                String productName = req.getParameter("productName");
+	                String photo = req.getParameter("photo");
+	                String info = req.getParameter("binfo");
+	                int number = Integer.parseInt(req.getParameter("productNumber"));
+	                double bprice = Double.parseDouble(req.getParameter("productPrice"));
+	                
+	                buyCard.setBid(i);
+	                buyCard.setBface("images/"+photo);
+	                buyCard.setBinfo(info);
+	                buyCard.setBname(productName);
+	                buyCard.setBnumber(number);
+	                buyCard.setBprice(bprice);
+	                
+	                boolean result = buyCardService.updateBuyCard(buyCard);
+	                
+	                if(result)
+	                {
+	                	List<BuyCard> product = prduct_server.getAllBuyCard();
+	    				req.setAttribute("product", product);
+	    				req.getRequestDispatcher("Product.jsp").forward(req, resp);
+	                }
+				}
 			}
 			if(op.equals("slecte")){
 				

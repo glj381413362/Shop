@@ -35,10 +35,12 @@ public class CartServlet extends HttpServlet{
 		//统一资源
 		IBuyCardService buyCardService = new BuyCardService();
 		HttpSession session = req.getSession();
+		int id = Integer.parseInt(req.getParameter("id"));
+		Object obj = session.getAttribute("cart");
 		if(op.equals("add"))
 		{
 			Map<Integer,BuyCard> cart = null;
-			Object obj = session.getAttribute("cart");
+			
 			if(obj == null)
 			{
 				cart = new HashMap<Integer, BuyCard>();
@@ -47,7 +49,7 @@ public class CartServlet extends HttpServlet{
 			}
 			//添加商品到蓝子
 			//细节  蓝子中已经存在的商品 只需要累加数量
-			int id = Integer.parseInt(req.getParameter("id"));
+			
 			if(cart.containsKey(id))
 			{
 				int num = cart.get(id).getCartnum();
@@ -60,14 +62,24 @@ public class CartServlet extends HttpServlet{
 			session.setAttribute("cart", cart);
 			//流程
 			//转发数据到   显示购物车页面 showCards.jsp
-			Map<Integer, BuyCard> carts = (Map<Integer, BuyCard>)session.getAttribute("cart");
-			req.setAttribute("carts", carts);
-			req.getRequestDispatcher("ShowCart.jsp").forward(req, resp);
+//			Map<Integer, BuyCard> carts = (Map<Integer, BuyCard>)session.getAttribute("cart");
+//			req.setAttribute("carts", carts);
+//			req.getRequestDispatcher("ShowCart.jsp").forward(req, resp);
+			resp.sendRedirect("ShowCart.jsp");
 			
 		}
 		if(op.equals("delete"))
 		{
-			
+			if(obj!=null)
+			{
+				Map<Integer, BuyCard> pro = (Map<Integer, BuyCard>) obj;
+				if(pro.containsKey(id))
+				{
+					pro.remove(id);
+					session.setAttribute("cart", pro);
+				}
+				resp.sendRedirect("ShowCart.jsp");
+			}
 		}
 		if(op.equals("update"))
 		{
@@ -75,7 +87,6 @@ public class CartServlet extends HttpServlet{
 		}
 		if(op.equals("select"))
 		{
-			String id = req.getParameter("id");
 //			if(cart)
 		}
 		
