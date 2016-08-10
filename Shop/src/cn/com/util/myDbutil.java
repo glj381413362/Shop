@@ -126,6 +126,6 @@ public class myDbutil {
 		}
 	}
 	public static void main(String[] args) {
-		System.out.println(myDbutil.getConnection());
+		System.out.println(con);
 	}
 }

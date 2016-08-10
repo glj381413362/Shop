@@ -9,6 +9,7 @@ import cn.com.server.IUserServer;
 
 public class UserServer implements IUserServer {
 
+	private IUserDao userDao = new UserDao();
 	public boolean addUserServer(User user) {
 		// TODO Auto-generated method stub
 		return false;
@@ -33,6 +34,21 @@ public class UserServer implements IUserServer {
 	public List<User> getAllUserServer() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public List<User> getAllUserDao() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getAllCountServer() {
+		// TODO Auto-generated method stub
+		return userDao.getAllCountDao();
+	}
+
+	public List<User> queryUserServer(int currentpage, int num) {
+		// TODO Auto-generated method stub
+		return userDao.queryUserDao(currentpage, num);
 	}
 
 }

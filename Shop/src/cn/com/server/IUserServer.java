@@ -36,5 +36,20 @@ public interface IUserServer {
 		 * @return
 		 */
 		public List<User> getAllUserServer();
-			
+		
+		public List<User> getAllUserDao();
+
+		/**
+		 * Server查询用户记录条数
+		 * @return
+		 */
+		public int getAllCountServer();
+		
+		/**
+		 * Server 返回用户信息
+		 * @param currentpage 当前页码
+		 * @param num 当前页记录条数
+		 * @return
+		 */
+		public List<User> queryUserServer(int currentpage,int num);
 }

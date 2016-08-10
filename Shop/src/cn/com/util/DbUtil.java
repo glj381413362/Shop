@@ -121,4 +121,16 @@ public class DbUtil {
 		}
 
 	}
+	public static void main(String[] args) {
+		String sql = "select * from promary;";
+		try {
+			System.out.println(DriverManager.getConnection(
+					"jdbc:mysql:///shop?characterEncoding=utf-8", "root",
+					"950618"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(getPreparedStatement(sql));
+	}
 }

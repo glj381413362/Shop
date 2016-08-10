@@ -82,4 +82,45 @@ public class UserDao implements IUserDao {
 		return userinfos;
 	}
 
+	public int getAllCountDao() {
+		// TODO Auto-generated method stub
+		String sql = "select count(*) as num from userinfo";
+		ResultSet rs = DbUtil.executeQuery(sql, null);
+		int nums=0;
+		try {
+			while(rs.next())
+			{
+				nums = rs.getInt("num");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nums;
+	}
+
+	public List<User> queryUserDao(int currentpage, int num) {
+		// TODO Auto-generated method stub
+		List<User> userinfos = new ArrayList<User>();
+		String sql = "select * from userinfo limit ?,?";
+		List<Object> params = new ArrayList<Object>();
+		params.add((currentpage-1)*num);
+		params.add(num);
+		ResultSet rs = DbUtil.executeQuery(sql, params);
+		try {
+			while (rs.next()) {
+				User userinfo = new User();
+				userinfo.setId(rs.getInt(1));
+				userinfo.setName(rs.getString(2));
+				userinfo.setPwd(rs.getString(3));
+				userinfos.add(userinfo);
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return userinfos;
+	}
+
 }
