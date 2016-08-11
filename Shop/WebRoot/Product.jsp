@@ -75,6 +75,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </tr>
    </c:forEach>
 </table>
+	<!-- 分页前台代码 -->
+		<table align="center" width="1000">
+		<tr>
+			<td align="center">
+			<c:if test="${curPage > 1}">
+					<a href="buyCardServlet.action?op=select&jumpPage=1">首页</a>&nbsp;&nbsp;&nbsp;
+		 		<a href="buyCardServlet.action?op=select&jumpPage=${curPage - 1}">上一页</a>
+				</c:if> <c:if test="${curPage <= 1}">
+			 		首页&nbsp;&nbsp;&nbsp;上一页
+		 		</c:if> &nbsp;&nbsp;&nbsp; <c:if test="${curPage < maxPage}">
+					<a href="buyCardServlet.action?op=select&jumpPage=${curPage + 1}">下一页</a>
+		 			&nbsp;&nbsp;&nbsp;
+		 			<a href="buyCardServlet.action?op=select&jumpPage=${maxPage}">尾页</a>
+				</c:if> <c:if test="${curPage >= maxPage}">
+					下一页
+		 			&nbsp;&nbsp;&nbsp;尾页		 		
+		 		</c:if>
+				&nbsp;&nbsp;总共${maxRowCount}行&nbsp;&nbsp;每页显示${rowsPrePage}行&nbsp;&nbsp;总共${maxPage}页&nbsp;&nbsp;&nbsp;&nbsp;当前为第${curPage}页</td>
+		</tr>
+	</table>
 		</div>
 	</div>
 	<div class="clear"></div>

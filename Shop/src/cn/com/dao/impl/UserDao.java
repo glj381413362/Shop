@@ -35,25 +35,25 @@ public class UserDao implements IUserDao {
 		List<Object> params = new ArrayList<Object>();
 		//∂ØÃ¨sql”Ôæ‰∆¥Ω”
 		String sql = "select * from userinfo where 1=1";
-		if (user.getId() != 0) {
+		if (user.getUserid() != 0) {
 			sql += " and userid=? ";
-			params.add(user.getId());
+			params.add(user.getUserid());
 		}
-		if (user.getName() != null) {
+		if (user.getUsername() != null) {
 			sql += " and username=? ";
-			params.add(user.getName());
+			params.add(user.getUsername());
 		}
-		if (user.getPwd() != null) {
+		if (user.getUserpwd() != null) {
 			sql += " and userpwd=? ";
-			params.add(user.getPwd());
+			params.add(user.getUserpwd());
 		}
 		ResultSet rs = DbUtil.executeQuery(sql, params);
 		try {
 			while (rs.next()) {
 				user1 = new User();
-				user1.setId(rs.getInt("userid"));
-				user1.setName(rs.getString("username"));
-				user1.setPwd(rs.getString("userpwd"));
+				user1.setUserid(rs.getInt("userid"));
+				user1.setUsername(rs.getString("username"));
+				user1.setUserpwd(rs.getString("userpwd"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -69,9 +69,9 @@ public class UserDao implements IUserDao {
 		try {
 			while (rs.next()) {
 				User userinfo = new User();
-				userinfo.setId(rs.getInt(1));
-				userinfo.setName(rs.getString(2));
-				userinfo.setPwd(rs.getString(3));
+				userinfo.setUserid(rs.getInt(1));
+				userinfo.setUsername(rs.getString(2));
+				userinfo.setUserpwd(rs.getString(3));
 				userinfos.add(userinfo);
 
 			}
@@ -110,9 +110,9 @@ public class UserDao implements IUserDao {
 		try {
 			while (rs.next()) {
 				User userinfo = new User();
-				userinfo.setId(rs.getInt(1));
-				userinfo.setName(rs.getString(2));
-				userinfo.setPwd(rs.getString(3));
+				userinfo.setUserid(rs.getInt(1));
+				userinfo.setUsername(rs.getString(2));
+				userinfo.setUserpwd(rs.getString(3));
 				userinfos.add(userinfo);
 
 			}

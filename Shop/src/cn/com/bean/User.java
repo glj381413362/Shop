@@ -5,23 +5,22 @@ public class User {
 	private int userid;
 	private String username;
 	private String userpwd;
-	public String getName() {
-		return username;
-	}
-	public void setName(String name) {
-		this.username = name;
-	}
-	public String getPwd() {
-		return userpwd;
-	}
-	public void setPwd(String pwd) {
-		this.userpwd = pwd;
-	}
-	public int getId() {
+	public int getUserid() {
 		return userid;
 	}
-	public void setId(int id) {
-		this.userid = id;
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
-	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getUserpwd() {
+		return userpwd;
+	}
+	public void setUserpwd(String userpwd) {
+		this.userpwd = userpwd;
+	}
 }

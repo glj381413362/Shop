@@ -57,8 +57,13 @@ public class BuyCardServlet extends HttpServlet{
 				String opp = req.getParameter("opp");
 				int i = Integer.parseInt(req.getParameter("id"));
 				BuyCard buyCard = buyCardService.getBuyCard(i);
+				if(opp.equals("show"))
+				{
+					//Ðª×ÅÁË
+				}
 				if(opp.equals("select"))
 				{
+					
 					req.setAttribute("buyCard", buyCard);
 					req.getRequestDispatcher("ProductUpdate.jsp").forward(req, resp);
 				}
@@ -88,9 +93,6 @@ public class BuyCardServlet extends HttpServlet{
 	    				req.getRequestDispatcher("Product.jsp").forward(req, resp);
 	                }
 				}
-			}
-			if(op.equals("slecte")){
-				
 			}
 	    }
 	}
