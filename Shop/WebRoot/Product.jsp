@@ -80,14 +80,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>
 			<td align="center">
 			<c:if test="${curPage > 1}">
-					<a href="buyCardServlet.action?op=select&jumpPage=1">首页</a>&nbsp;&nbsp;&nbsp;
-		 		<a href="buyCardServlet.action?op=select&jumpPage=${curPage - 1}">上一页</a>
+					<a href="buyCardServlet.action?op=show&jumpPage=1">首页</a>&nbsp;&nbsp;&nbsp;
+		 		<a href="buyCardServlet.action?op=show&jumpPage=${curPage - 1}">上一页</a>
 				</c:if> <c:if test="${curPage <= 1}">
 			 		首页&nbsp;&nbsp;&nbsp;上一页
 		 		</c:if> &nbsp;&nbsp;&nbsp; <c:if test="${curPage < maxPage}">
-					<a href="buyCardServlet.action?op=select&jumpPage=${curPage + 1}">下一页</a>
+					<a href="buyCardServlet.action?op=show&jumpPage=${curPage + 1}">下一页</a>
 		 			&nbsp;&nbsp;&nbsp;
-		 			<a href="buyCardServlet.action?op=select&jumpPage=${maxPage}">尾页</a>
+		 			<a href="buyCardServlet.action?op=show&jumpPage=${maxPage}">尾页</a>
 				</c:if> <c:if test="${curPage >= maxPage}">
 					下一页
 		 			&nbsp;&nbsp;&nbsp;尾页		 		

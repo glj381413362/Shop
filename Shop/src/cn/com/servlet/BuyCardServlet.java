@@ -13,6 +13,7 @@ import cn.com.server.IBuyCardService;
 import cn.com.server.IUserServer;
 import cn.com.server.impl.BuyCardService;
 import cn.com.server.impl.UserServer;
+import cn.com.util.PageUtil;
 
 public class BuyCardServlet extends HttpServlet{
 
@@ -39,6 +40,39 @@ public class BuyCardServlet extends HttpServlet{
 	    if(op != null)
 	    {
 	    	//流程
+	    	if(op.equals("show"))
+			{
+				//获得总记录条数
+				int count = buyCardService.getBuyCardCountService();
+				//调用分类工具类
+				PageUtil pageUtil = new PageUtil(5, count);
+				int jumpPage=Integer.parseInt(req.getParameter("jumpPage"));
+				// 处理页码逻辑
+				if (jumpPage <= 1) 
+				{
+
+					pageUtil.setCurPage(1);
+				} else if (jumpPage >= pageUtil.getMaxPage()) {
+
+					pageUtil.setCurPage(pageUtil.getMaxPage());
+				} else {
+					pageUtil.setCurPage(jumpPage);
+				}
+				//分批获取数据
+				List<BuyCard> product=buyCardService.queryBuyCardService(jumpPage, 5);
+				//设置页面交互逻辑
+				req.setAttribute("rowsPrePage", pageUtil.getRowsPrePage());
+				req.setAttribute("maxRowCount", pageUtil.getMaxRowsCount());
+				req.setAttribute("maxPage", pageUtil.getMaxPage());
+				req.setAttribute("jumpPage", jumpPage);
+				req.setAttribute("curPage", pageUtil.getCurPage());
+				
+				
+				//转发数据
+				req.setAttribute("product", product);
+				req.getRequestDispatcher("Product.jsp").forward(req, resp);
+				
+			}
 			if(op.equals("add")){
 	    		
 	    	}
@@ -57,10 +91,6 @@ public class BuyCardServlet extends HttpServlet{
 				String opp = req.getParameter("opp");
 				int i = Integer.parseInt(req.getParameter("id"));
 				BuyCard buyCard = buyCardService.getBuyCard(i);
-				if(opp.equals("show"))
-				{
-					//歇着了
-				}
 				if(opp.equals("select"))
 				{
 					

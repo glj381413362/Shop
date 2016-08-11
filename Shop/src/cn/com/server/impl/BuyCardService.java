@@ -33,4 +33,14 @@ public class BuyCardService implements IBuyCardService {
 		return buyCardDao.updateBuyCard(buyCard);
 	}
 
+	public int getBuyCardCountService() {
+		// TODO Auto-generated method stub
+		return buyCardDao.getBuyCardCountDao();
+	}
+
+	public List<BuyCard> queryBuyCardService(int currentpage, int num) {
+		// TODO Auto-generated method stub
+		return buyCardDao.queryBuyCardDao(currentpage, num);
+	}
+
 }
