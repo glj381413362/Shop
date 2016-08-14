@@ -2,8 +2,8 @@ package cn.com.util;
 
 
 import java.util.*;
-import java.util.Date;
 import java.sql.*;
+
 
 
 public class myDbutil {

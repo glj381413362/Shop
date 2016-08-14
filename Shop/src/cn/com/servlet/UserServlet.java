@@ -1,7 +1,9 @@
 package cn.com.servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,13 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONObject;
+
+
 import cn.com.bean.BuyCard;
 import cn.com.bean.User;
 import cn.com.server.IBuyCardService;
 import cn.com.server.IUserServer;
 import cn.com.server.impl.BuyCardService;
 import cn.com.server.impl.UserServer;
-import cn.com.util.PageUtil;
 
 public class UserServlet extends HttpServlet{
 
@@ -32,7 +36,6 @@ public class UserServlet extends HttpServlet{
 		// TODO Auto-generated method stub
 		req.setCharacterEncoding("utf-8");
 		resp.setCharacterEncoding("utf-8");
-		System.out.println("dd");
 		//统一流程  op  login,add,delete,select
 		//向调用引擎的页面获取op操作符参数
 		String op=req.getParameter("op");
@@ -101,6 +104,7 @@ public class UserServlet extends HttpServlet{
 			}
 			if(op.equals("select"))
 			{
+				/*
 				//获取总记录数
 				int count=user_server.getAllCountServer();
 				//调用分页工具类<=>逻辑代码
@@ -130,6 +134,29 @@ public class UserServlet extends HttpServlet{
 				//转发数据
 				req.setAttribute("listuser", listuser);
 				req.getRequestDispatcher("User.jsp").forward(req, resp);
+				*/
+				System.out.println("MyTestServlet");
+				//jquery easyui datagrid
+				String rows=req.getParameter("rows");
+				String page=req.getParameter("page");
+				System.out.println("rows:"+rows+" page:"+page);
+				
+				//处理分页数据
+				int count=user_server.getAllCountServer();
+				
+				List<User> uList=user_server.queryUserServer(Integer.parseInt(page),Integer.parseInt(rows));
+			
+				//提供json<=>Map
+				Map<String, Object> map=new HashMap<String, Object>();
+				map.put("total", count);
+				map.put("rows", uList);
+				JSONObject json=JSONObject.fromObject(map);
+				System.out.println(json);
+				//响应
+				resp.setContentType("text/html; charset=utf-8");
+				resp.getWriter().print(json.toString());
+				resp.getWriter().flush();
+				resp.getWriter().close();
 				
 			}
 		}

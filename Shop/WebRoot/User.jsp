@@ -13,8 +13,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link type="text/css" rel="stylesheet" href="css/style.css" />
 <script type="text/javascript" src="../scripts/function-manage.js"></script>
 
-</head>
-<body >
+<link rel="stylesheet" href="<%=basePath%>css/easyui.css" type="text/css"></link>
+<link rel="stylesheet" href="<%=basePath%>css/icon.css" type="text/css"></link>
+<link rel="stylesheet" href="<%=basePath%>css/demo.css" type="text/css"></link>
+<script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery.easyui.min.js"></script><body >
 <form action="userServlet.action?op=select" method="post">
 <div id="header" class="wrap">
 	<div id="logo"><img src="images/logo.gif" /></div>
@@ -56,11 +59,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</dl>
 		</div>
 	</div>
-	${listuser};
 	<div class="main">
 		<h2>用户管理</h2>
 		<div class="manage">
-			<table class="list">
+			<!--<table class="list">
 				<tr>
 					<th>ID</th>
 					<th>姓名</th>
@@ -75,8 +77,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        <td>操作</td>
 			    </tr>
 				</c:forEach>
-			</table>
-			<!-- 分页前台代码 -->
+			</table>-->
+	<table id="dg" title="Custom DataGrid Pager" style="width:700px;height:250px"
+			data-options="rownumbers:true,singleSelect:true,pagination:true,url:'userServlet.action?op=select',method:'get'">
+		<thead>
+			<tr>
+				<th data-options="field:'userid',width:80">用户编号</th>
+				<th data-options="field:'username',width:100">用户名</th>
+				<th data-options="field:'userpwd',width:80,align:'right'">用户密码</th>
+			</tr>
+		</thead>
+	</table>
+	
+	<script type="text/javascript">
+		$(function(){
+			var pager = $('#dg').datagrid().datagrid('getPager');	// get the pager of datagrid
+			pager.pagination({
+				buttons:[{
+					iconCls:'icon-search',
+					handler:function(){
+						alert('search');
+					}
+				},{
+					iconCls:'icon-add',
+					handler:function(){
+						alert('add');
+					}
+				},{
+					iconCls:'icon-edit',
+					handler:function(){
+						alert('edit');
+					}
+				}]
+			});			
+		})
+	</script>
+			
+			<!-- 分页前台代码 
 		<table align="center" width="1000">
 		<tr>
 			<td align="center">
@@ -95,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 		</c:if>
 				&nbsp;&nbsp;总共${maxRowCount}行&nbsp;&nbsp;每页显示${rowsPrePage}行&nbsp;&nbsp;总共${maxPage}页&nbsp;&nbsp;&nbsp;&nbsp;当前为第${curPage}页</td>
 		</tr>
-	</table>
+	</table>-->
 		</div>
 	</div>
 	<div class="clear"></div>
